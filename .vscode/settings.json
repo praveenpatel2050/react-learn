@@ -1,0 +1,11 @@
+{
+    "editor.fontSize": 18,
+    "emmet.includeLanguages": {
+        "javascript":"javascriptreact"
+    },
+    "emmet.syntaxProfiles": {
+        "javascript":"jsx"
+    },
+    "editor.formatOnSave": true,
+    "terminal.integrated.fontSize": 16,
+}
