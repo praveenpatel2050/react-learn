@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 //@route    api/profile/test
 //@desc     Test API
 //@access   Public
