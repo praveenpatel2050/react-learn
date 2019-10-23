@@ -4,18 +4,21 @@ const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/key");
+const passport = require("passport");
 
 //load User model for Check Email
 const User = require("../../models/Users");
 
-//@route    api/profile/test
+//@route    api/users/test
 //@desc     Test API
 //@access   Public
+//@Type     Get
 router.get("/test", (req, res) => res.json({ msg: "User is Working Good" }));
 
-//@route    api/profile/register
+//@route    api/users/register
 //@desc     User Registeration  API
 //@access   Public
+//@Type     Post
 router.post("/register", (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
@@ -47,8 +50,9 @@ router.post("/register", (req, res) => {
   });
 });
 
-//@route    api/profile/login
+//@route    api/users/login
 //@desc     User Login  API
+//@Type     Post
 //@access   Public
 router.post("/login", (req, res) => {
   const email = req.body.email;
@@ -62,7 +66,7 @@ router.post("/login", (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         const payload = { id: user.id, name: user.name, avatar: user.avatar }; //create payload
-        // res.json({ success: "true", msg: "Successfully Authenticate!" });
+
         //sign token
         var token = jwt.sign(
           payload,
@@ -84,5 +88,22 @@ router.post("/login", (req, res) => {
     });
   });
 });
+
+//@route    api/users/current
+//@desc     Current User  API
+//@Type     Get
+//@access   Private
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({
+      success: "true",
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    });
+  }
+);
 
 module.exports = router;
