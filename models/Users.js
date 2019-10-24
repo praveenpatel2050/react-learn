@@ -1,7 +1,8 @@
 const mangoose = require("mongoose");
+const Schema = mangoose.Schema;
 
 //create Schema
-const schema = mangoose.Schema({
+const UserSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -24,4 +25,4 @@ const schema = mangoose.Schema({
   }
 });
 
-module.exports = User = mangoose.model("user", schema);
+module.exports = User = mangoose.model("user", UserSchema);
