@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 //create collection Schema
 const ProfileSchema = new Schema({
   user: {
-    type: Schema.type.ObjectId,
-    ref: "users"
+    ref: "users",
+    type: Schema.Types.ObjectId
   },
   handle: {
     type: String,
