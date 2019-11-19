@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const db = require("./config/key").mongoURI;
 mongoos
-  .connect(db)
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDb Connect Successfully!"))
   .catch(err => console.log(err));
 
