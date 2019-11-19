@@ -70,11 +70,14 @@ router.post(
           { new: true }
         ).then(profile => res.json(profile));
       } else {
+        //check handle
         Profile.findOne({ handle: profileFields.handle }).then(profile => {
           if (profile) {
             errors.handle = "this Handle Already Exists";
             res.json.status(400).json(errors);
           }
+
+          //save Profile if not Exists
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
