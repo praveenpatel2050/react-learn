@@ -21,9 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const db = require("./config/key").mongoURI;
 mongoos
-  .connect(db, { useNewUrlParser: true })
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDb Connect Successfully!"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 app.get("/", (req, res) => res.send("Hello ! Buddy How Are You"));
 
